@@ -4,10 +4,19 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
+  const [ color, setColor ] = useState('black'); 
 
   const onclick = async () => {
-
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    chrome.scripting.executeScript<string[], void>({
+      target: { tabId: tab.id! },
+      args: [color],
+      func: (color) => {
+        document.body.style.backgroundColor = color;
+      }
+    });
   }
+
   return (
     <>
       <div>
@@ -20,7 +29,9 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
+        <input type="color" onChange={(e) => setColor(e.currentTarget.value)}></input>
         <button onClick={() => onclick()}>
+          Click me!
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
