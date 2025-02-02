@@ -27,19 +27,19 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Enter or select color</h1>
       <div className="card">
+      <input 
+          type="text" 
+          value={color} 
+          onChange={(e) => setColor(e.target.value)} 
+          placeholder="Enter color" 
+        />
         <input type="color" onChange={(e) => setColor(e.currentTarget.value)}></input>
         <button onClick={() => onclick()}>
           Click me!
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
